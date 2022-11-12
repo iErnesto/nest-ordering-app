@@ -6,6 +6,7 @@ import { OrdersController } from './orders.controller';
 import { OrdersService } from './orders.service';
 import { MongooseModule } from '@nestjs/mongoose';
 import { Order, OrderSchema } from '../schemas/order.schema';
+import { OrdersRepository } from './orders.repository';
 
 @Module({
   imports: [
@@ -13,6 +14,7 @@ import { Order, OrderSchema } from '../schemas/order.schema';
       isGlobal: true,
       validationSchema: Joi.object({
         MONGODB_URI: Joi.string().required(),
+        PORT: Joi.number().required(),
       }),
       envFilePath: './apps/orders/.env',
     }),
@@ -20,6 +22,6 @@ import { Order, OrderSchema } from '../schemas/order.schema';
     MongooseModule.forFeature([{ name: Order.name, schema: OrderSchema }]),
   ],
   controllers: [OrdersController],
-  providers: [OrdersService],
+  providers: [OrdersService, OrdersRepository],
 })
 export class OrdersModule {}
