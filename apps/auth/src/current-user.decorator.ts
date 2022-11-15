@@ -8,6 +8,9 @@ export const getCurrentUserByContext = (context: ExecutionContext): User => {
   if (context.getType() === 'rpc') {
     return context.switchToRpc().getData().user;
   }
+  if (context.getType() === 'rpc') {
+    return context.switchToRpc().getData().user;
+  }
 };
 
 export const CurrentUser = createParamDecorator(
